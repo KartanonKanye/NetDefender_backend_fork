@@ -1,0 +1,15 @@
+{
+  "name": "backend_netdefender",
+  "version": "0.0.1",
+  "description": "Backend for NetDefender web app for ELEC-C7420 Basic Principles in Networking. Developed by Kabir Bissessar and Maria Lappalainen.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kabir Bissessar",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
