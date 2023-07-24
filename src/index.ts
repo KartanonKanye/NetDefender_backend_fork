@@ -1,6 +1,8 @@
-const app = require("express")();
+import express, { Express, Request, Response } from "express";
 
-app.get('/', (req,res) => {
+const app: Express = express();
+
+app.get('/', (req: Request,res: Response) => {
   // res.status(200).send({
   //   hello: '👨‍💻️'
   // })
