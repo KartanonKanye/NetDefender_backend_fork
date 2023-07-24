@@ -1,15 +1,8 @@
-import express, { Express, Request, Response } from "express";
+import app from "./app.js";
+import Logger from "./middleware/Logger.js";
 
-const app: Express = express();
+const PORT = process.env.PORT || 12345;
 
-app.get('/', (req: Request,res: Response) => {
-  // res.status(200).send({
-  //   hello: '👨‍💻️'
-  // })
-  res.status(200).send("<h1>Hello world! 🧗️</h1>")
-});
-
-const PORT = 12345
 app.listen( PORT, () => {
-  console.log(`Server up and running on http::/localhost:${PORT}`);
+  Logger.info(`Server up and running on http::/localhost:${PORT}`);
 });
