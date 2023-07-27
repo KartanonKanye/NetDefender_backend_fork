@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface IStudent {
+export interface IStudent {
 	name: string;
 	username: string;
 	student_number: string;
@@ -10,7 +10,7 @@ interface IStudent {
 	rating: number;
 }
 
-interface IStudentModel extends IStudent, Document {}
+export interface IStudentModel extends IStudent, Document {}
 
 const StudentSchema: Schema = new Schema({
 	name: { type: String, required: true },
@@ -21,5 +21,13 @@ const StudentSchema: Schema = new Schema({
 	levels_completed: { type: Number, default: 0 },
 	rating: { type: Number, default: 0 }
 });
+
+StudentSchema.set('toJSON', {
+	transform: (document, returnedObject) => {
+		returnedObject.id = returnedObject._id.toString()
+		delete returnedObject._id
+		delete returnedObject.__v
+	}
+})
 
 export default mongoose.model<IStudentModel>('Student', StudentSchema);
