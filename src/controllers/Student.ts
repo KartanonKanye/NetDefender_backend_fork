@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
 import Student, { IStudent } from '../models/Student.js';
 
