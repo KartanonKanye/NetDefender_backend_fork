@@ -1,63 +1,46 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import Student, { IStudent } from '../models/Student.js';
+import bcrypt from 'bcrypt';
 
-const createStudent = (req: Request, res: Response, next: NextFunction) => {
-	const { name, username, student_number } = req.body;
+const createStudent = async (req: Request, res: Response) => {
+	const { name, username, student_number, password } = req.body;
+    
+    const saltRounds = 10;
+    
+    const password_hash = await bcrypt.hash(password, saltRounds);
 
 	const student = new Student({
 		name,
 		username,
-		student_number
+		student_number,
+        password_hash
 	});
 
-	return student
-		.save()
-		.then(student => res.status(201).json({ student }))
-		.catch(error => res.status(500).json({ error }));
+    const student_1 = await student.save();
+    return res.status(201).json({ student_1 });
 };
 
-const getAllStudents = (req: Request, res: Response, next: NextFunction) => {
-	return Student.find()
-		.then(students => {
-			res.status(200).json({ students });
-		})
-		.catch(error => res.status(500).json({ error }));
+const getAllStudents = async (req: Request, res: Response) => {
+    const students = await Student.find();
+    res.status(200).json({ students });
 };
 
-const getStudentById = (req: Request, res: Response, next: NextFunction) => {
+const getStudentById = async (req: Request, res: Response) => {
 	const studentID = req.params.studentID
-
-	return Student.findById(studentID)
-		.then(student => {
-			student 
-			? res.status(200).json({ student })
-			: res.status(404).json({message: "studentID not found in database"})
-		})
-		.catch(error => res.status(500).json({ error }));
+    const student = await Student.findById(studentID);
+    res.status(200).json({ student })
 };
 
-const updateStudentById = (req: Request<{studentID: string}, {ReqBody: IStudent}>, res: Response, next: NextFunction) => {
+const updateStudentById = async (req: Request<{studentID: string}, {ReqBody: IStudent}>, res: Response) => {
 	const studentID: string = req.params.studentID
-
-	return Student.findByIdAndUpdate(studentID, req.body, {new: true})
-		.then(updatedStudent => {
-			updatedStudent 
-			? res.status(201).json({ updatedStudent })
-			: res.status(404).json({message: "studentID not found in database"})
-		})
-		.catch(error => res.status(500).json({ error }));
+    const updatedStudent = await Student.findByIdAndUpdate(studentID, req.body, { new: true });
+    res.status(201).json({ updatedStudent })
 };
 
-const deleteStudentById = (req: Request<{studentID: string}>, res: Response, next: NextFunction) => {
+const deleteStudentById = async (req: Request<{studentID: string}>, res: Response) => {
 	const studentID: string = req.params.studentID
-
-	return Student.findByIdAndDelete(studentID)
-		.then(student => {
-			student 
-			? res.status(204).end()
-			: res.status(404).json({message: "studentID not found in database"})
-		})
-		.catch(error => res.status(500).json({ error }));
+    await Student.findByIdAndDelete(studentID);
+    res.status(204).end()
 };
 
 

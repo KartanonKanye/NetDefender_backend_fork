@@ -35,7 +35,7 @@ const startServer = () => {
 	app.use(express.json());
 
 	/** Rules of our API */
-	app.use((req, res, next) => {
+	app.use((req: Request, res: Response, next: NextFunction) => {
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
@@ -55,14 +55,20 @@ const startServer = () => {
 	// app.get('/ping', (req, res, next) => res.status(200).json({ hello: 'world' }));
 
 	/** Error handling */
-	app.use((req, res, next) => {
-		const error = new Error('Not found');
+	app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 
 		Logger.error(error);
-
-		res.status(404).json({
-			message: error.message
-		});
+        
+        if (error.name === 'CastError') {
+            res.status(400).send({error: 'malformated id'})
+        }
+        else {
+            if (res.headersSent) {
+                next(error)
+            }
+            res.status(500)
+            res.render('error', { error: error })
+        }
 	});
 
 	app.listen(config.PORT, () => {

@@ -4,6 +4,7 @@ export interface IStudent {
 	name: string;
 	username: string;
 	student_number: string;
+    password_hash: string;
 	tutorial_completed: boolean;
 	public_key: string;
 	levels_completed: number;
@@ -16,6 +17,7 @@ const StudentSchema: Schema = new Schema({
 	name: { type: String, required: true },
 	username: { type: String, required: true },
 	student_number: { type: String, required: true },
+    password_hash: {type: String, required: true},
 	tutorial_completed: { type: Boolean, default: false },
 	public_key: { type: String },
 	levels_completed: { type: Number, default: 0 },
@@ -27,6 +29,8 @@ StudentSchema.set('toJSON', {
 		returnedObject.id = returnedObject._id.toString()
 		delete returnedObject._id
 		delete returnedObject.__v
+        // do not reveal password_hash
+        delete returnedObject.password_hash
 	}
 })
 
