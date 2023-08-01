@@ -6,6 +6,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import studentRouter from './routes/Student.js';
 import messageRouter from './routes/Message.js';
+import loginRouter from './routes/Login.js';
 
 mongoose
 	.connect(config.MONGODB_URI, { retryWrites: true, w: 'majority' })
@@ -50,6 +51,7 @@ const startServer = () => {
 	/** Routes */
 	app.use('/students', studentRouter);
 	app.use('/messages', messageRouter);
+    app.use('/login', loginRouter);
 
 	/** Healthcheck */
 	// app.get('/ping', (req, res, next) => res.status(200).json({ hello: 'world' }));
