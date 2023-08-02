@@ -94,7 +94,7 @@ const deleteStudentById = async (req: Request<{studentID: string}>, res: Respons
     if (!decodedToken.id) {
         return res.status(401).json({error: 'Token invalid'})
     }
-    else if (decodedToken.id !== studentID) {
+    else if (decodedToken.id !== studentID || studentID !== "admin") {
         return res.status(401).json({error: 'Unauthorized user'})
     }
 
