@@ -74,8 +74,7 @@ const startServer = () => {
             if (res.headersSent) {
                 next(error)
             }
-            res.status(500)
-            res.render('error', { error: error })
+            res.status(500).json({ error: error.message })
         }
 	});
 

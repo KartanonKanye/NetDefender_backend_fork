@@ -38,32 +38,66 @@ const getAllStudents = async (req: Request, res: Response) => {
 };
 
 const getStudentById = async (req: Request, res: Response) => {
-	// const studentID = req.params.studentID
+	const studentID = req.params.studentID
     const token = getTokenFrom(req)
-    // Logger.log("inputted token: " + token)
-    if (token !== null) {
-        const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload
-        // Logger.log("Decoded token: " + decodedToken)
-        if (!decodedToken.id) {
-            return res.status(401).json({error: 'Token invalid'})
-        }
+    
+    if (token === null) {
+        return res.status(401).json({error: 'Authorization token required'})
+    }
 
-        const student = await Student.findById(decodedToken.id);
-        res.status(200).json({ student })
+    const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload
+    
+    if (!decodedToken.id) {
+        return res.status(401).json({error: 'Token invalid'})
     }
-    else {
-        res.status(401).json({error: 'Authorization token required'})
+    else if (decodedToken.id !== studentID) {
+        return res.status(401).json({error: 'Unauthorized user'})
     }
+
+    const student = await Student.findById(decodedToken.id);
+    return res.status(200).json({ student })
 };
 
 const updateStudentById = async (req: Request<{studentID: string}, {ReqBody: IStudent}>, res: Response) => {
 	const studentID: string = req.params.studentID
+    
+    const token = getTokenFrom(req)
+    
+    if (token === null) {
+        return res.status(401).json({error: 'Authorization token required'})
+    }
+
+    const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload
+    
+    if (!decodedToken.id) {
+        return res.status(401).json({error: 'Token invalid'})
+    }
+    else if (decodedToken.id !== studentID) {
+        return res.status(401).json({error: 'Unauthorized user'})
+    }
+
     const updatedStudent = await Student.findByIdAndUpdate(studentID, req.body, { new: true });
-    res.status(201).json({ updatedStudent })
+    return res.status(201).json({ updatedStudent })
 };
 
 const deleteStudentById = async (req: Request<{studentID: string}>, res: Response) => {
 	const studentID: string = req.params.studentID
+    
+    const token = getTokenFrom(req)
+    
+    if (token === null) {
+        return res.status(401).json({error: 'Authorization token required'})
+    }
+
+    const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload
+    
+    if (!decodedToken.id) {
+        return res.status(401).json({error: 'Token invalid'})
+    }
+    else if (decodedToken.id !== studentID) {
+        return res.status(401).json({error: 'Unauthorized user'})
+    }
+
     await Student.findByIdAndDelete(studentID);
     res.status(204).end()
 };
