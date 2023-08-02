@@ -1,12 +1,24 @@
 import { Request, Response } from 'express';
 import Student, { IStudent } from '../models/Student.js';
 import bcrypt from 'bcrypt';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import config from '../utils/config.js';
+import Logger from '../utils/Logger.js';
+
+const getTokenFrom = (req: Request) => {
+    const auth: string | undefined = req.get('Authorization');
+
+    if (auth && auth.startsWith('Bearer ')) {
+        return auth.replace('Bearer ', '');
+    }
+
+    return null;
+}
 
 const createStudent = async (req: Request, res: Response) => {
 	const { name, username, student_number, password } = req.body;
     
     const saltRounds = 10;
-    
     const password_hash = await bcrypt.hash(password, saltRounds);
 
 	const student = new Student({
@@ -26,9 +38,22 @@ const getAllStudents = async (req: Request, res: Response) => {
 };
 
 const getStudentById = async (req: Request, res: Response) => {
-	const studentID = req.params.studentID
-    const student = await Student.findById(studentID);
-    res.status(200).json({ student })
+	// const studentID = req.params.studentID
+    const token = getTokenFrom(req)
+    // Logger.log("inputted token: " + token)
+    if (token !== null) {
+        const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload
+        // Logger.log("Decoded token: " + decodedToken)
+        if (!decodedToken.id) {
+            return res.status(401).json({error: 'Token invalid'})
+        }
+
+        const student = await Student.findById(decodedToken.id);
+        res.status(200).json({ student })
+    }
+    else {
+        res.status(401).json({error: 'Authorization token required'})
+    }
 };
 
 const updateStudentById = async (req: Request<{studentID: string}, {ReqBody: IStudent}>, res: Response) => {

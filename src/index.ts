@@ -64,6 +64,12 @@ const startServer = () => {
         if (error.name === 'CastError') {
             res.status(400).send({error: 'malformated id'})
         }
+        else if (error.name === 'ValidationError') {
+            res.status(400).json({error: error.message})
+        }
+        else if (error.name === 'JsonWebTokenError') {
+            res.status(400).json({error: error.message})
+        }
         else {
             if (res.headersSent) {
                 next(error)
