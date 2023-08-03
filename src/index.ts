@@ -32,6 +32,7 @@ const startServer = () => {
 		next();
 	});
 
+    app.use(cors());
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
 
@@ -49,9 +50,9 @@ const startServer = () => {
 	});
 
 	/** Routes */
-	app.use('/students', studentRouter);
-	app.use('/messages', messageRouter);
-    app.use('/login', loginRouter);
+	app.use('/api/students', studentRouter);
+	app.use('/api/messages', messageRouter);
+    app.use('/api/login', loginRouter);
 
 	/** Healthcheck */
 	// app.get('/ping', (req, res, next) => res.status(200).json({ hello: 'world' }));

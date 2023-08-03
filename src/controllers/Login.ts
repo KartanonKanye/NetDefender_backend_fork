@@ -25,7 +25,7 @@ const LoginStudent = async (req: Request, res: Response) => {
 
     const token = jwt.sign(userForToken, config.SECRET)
 
-    res.status(200).send({token, username: user.username, name: user.name})
+    res.status(200).send({token, username: user.username, name: user.name, user_id: user.id})
 }
 
 export default LoginStudent
