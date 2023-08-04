@@ -8,11 +8,11 @@ export interface IStudent {
 	tutorial_completed: boolean;
 	public_key: string;
 	levels: [
-        { id: number; completed: boolean; points: number; },
-        { id: number; completed: boolean; points: number; },
-        { id: number; completed: boolean; points: number; },
-        { id: number; completed: boolean; points: number; },
-        { id: number; completed: boolean; points: number; }
+        [{ id: number; completed: boolean; points: number; name: string; }, { id: number; completed: boolean; points: number; name: string; } ],
+        [{ id: number; completed: boolean; points: number; name: string; }],
+        [{ id: number; completed: boolean; points: number; name: string; }],
+        [{ id: number; completed: boolean; points: number; name: string; }],
+        [{ id: number; completed: boolean; points: number; name: string; }]
     ];
 	rating: number;
 }
@@ -20,12 +20,12 @@ export interface IStudent {
 export interface IStudentModel extends IStudent, Document {}
 
 const levelsDefault =  [
-        { id: 1, completed: false, points: 20 },
-        { id: 2, completed: false, points: 20 },
-        { id: 3, completed: false, points: 20 },
-        { id: 4, completed: false, points: 20 },
-        { id: 5, completed: false, points: 20 }
-]
+        [{ id: 1, completed: false, points: 10, name: 'Level 1: Identify Attacks' }, { id: 2, completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
+        [{ id: 3, completed: false, points: 20, name: '' }],
+        [{ id: 4, completed: false, points: 20, name: '' }],
+        [{ id: 5, completed: false, points: 20, name: '' }],
+        [{ id: 6, completed: false, points: 20, name: '' }]
+];
 
 const StudentSchema: Schema = new Schema({
 	name: { type: String, required: true },
