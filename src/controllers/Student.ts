@@ -5,6 +5,13 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../utils/config.js';
 import Logger from '../utils/Logger.js';
 
+interface ICreateStudent {
+    name: string;
+    username: string;
+    student_number: string;
+    password: string;
+}
+
 const getTokenFrom = (req: Request) => {
     const auth: string | undefined = req.get('Authorization');
 
@@ -15,7 +22,7 @@ const getTokenFrom = (req: Request) => {
     return null;
 }
 
-const createStudent = async (req: Request, res: Response) => {
+const createStudent = async (req: Request<{ReqBody: ICreateStudent}>, res: Response) => {
 	const { name, username, student_number, password } = req.body;
     
     const saltRounds = 10;
