@@ -15,16 +15,17 @@ export interface IStudent {
         [{ id: number; completed: boolean; points: number; name: string; }]
     ];
 	rating: number;
+    points: number;
 }
 
 export interface IStudentModel extends IStudent, Document {}
 
 const levelsDefault =  [
-        [{ id: 1, completed: false, points: 10, name: 'Level 1: Identify Attacks' }, { id: 2, completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
-        [{ id: 3, completed: false, points: 20, name: '' }],
-        [{ id: 4, completed: false, points: 20, name: '' }],
-        [{ id: 5, completed: false, points: 20, name: '' }],
-        [{ id: 6, completed: false, points: 20, name: '' }]
+        [{ id: 1, completed: false, points: 10, name: 'Level 1: Identify Attacks' }],
+        [{ id: 2, completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
+        [{ id: 3, completed: false, points: 20, name: 'Level 3: RSA encryption' }],
+        [{ id: 4, completed: false, points: 20, name: 'Level 4: Web of Trust' }],
+        [{ id: 5, completed: false, points: 20, name: 'Level 5: Capture the flag' }]
 ];
 
 const StudentSchema: Schema = new Schema({
@@ -35,7 +36,8 @@ const StudentSchema: Schema = new Schema({
 	tutorial_completed: { type: Boolean, default: false },
 	public_key: { type: String },
 	levels: { type: Array, default: levelsDefault},
-	rating: { type: Number, default: 0 }
+	rating: { type: Number, default: 0 },
+    points: { type: Number, default: 0}
 });
 
 StudentSchema.set('toJSON', {

@@ -24,8 +24,10 @@ const getTokenFrom = (req: Request) => {
 
 const createStudent = async (req: Request<{ReqBody: ICreateStudent}>, res: Response) => {
 	const { name, username, student_number, password } = req.body;
+    Logger.log(`Request Body: {${name}, ${username}, ${student_number}, ${password}}`)
     
     const saltRounds = 10;
+
     const password_hash = await bcrypt.hash(password, saltRounds);
 
 	const student = new Student({
