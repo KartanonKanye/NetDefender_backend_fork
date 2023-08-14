@@ -51,10 +51,10 @@ const startServer = () => {
 	});
 
 	/** Routes */
-	app.use('/api/students', studentRouter);
-	app.use('/api/messages', messageRouter);
-    app.use('/api/login', loginRouter);
-    app.use('/api/signup', signupRouter);
+	app.use('/students', studentRouter);
+	app.use('/messages', messageRouter);
+    app.use('/login', loginRouter);
+    app.use('/signup', signupRouter);
 
 	/** Healthcheck */
 	// app.get('/ping', (req, res, next) => res.status(200).json({ hello: 'world' }));
