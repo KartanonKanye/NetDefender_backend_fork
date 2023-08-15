@@ -82,6 +82,6 @@ const startServer = () => {
 	});
 
 	app.listen(config.PORT, () => {
-		Logger.info(`Server up and running on http::/localhost:${config.PORT}`);
+		Logger.info(`Server up and running on http://localhost:${config.PORT}`);
 	});
 };
