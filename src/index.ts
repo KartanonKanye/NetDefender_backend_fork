@@ -19,6 +19,7 @@ mongoose
 
 // start server only if Mongoose connects
 const startServer = () => {
+    app.use(cors());
 	// Log the request
 	app.use((req: Request, res: Response, next: NextFunction) => {
 		Logger.info(`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
@@ -33,7 +34,6 @@ const startServer = () => {
 		next();
 	});
 
-    app.use(cors());
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
 
@@ -82,6 +82,6 @@ const startServer = () => {
 	});
 
 	app.listen(config.PORT, () => {
-		Logger.info(`Server up and running on http::/localhost:${config.PORT}`);
+		Logger.info(`Server up and running on http://localhost:${config.PORT}`);
 	});
 };
