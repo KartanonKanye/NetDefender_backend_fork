@@ -9,6 +9,10 @@ import messageRouter from './routes/Message.js';
 import loginRouter from './routes/Login.js';
 import signupRouter from './routes/Signup.js';
 
+// The app first tries to establish a connection to the MongoDB database. 
+// If this is successful, it starts the server via the startServer method.
+// else, it logs the error that was encountered.
+
 mongoose
 	.connect(config.MONGODB_URI, { retryWrites: true, w: 'majority' })
 	.then(() => {
@@ -19,13 +23,15 @@ mongoose
 
 // start server only if Mongoose connects
 const startServer = () => {
+    // Allow CORS on the server
+    // TODO: change this to incorporate a whitelist, so that only select domains can access this server.
     app.use(cors());
-	// Log the request
+	// Log any request made to the server
 	app.use((req: Request, res: Response, next: NextFunction) => {
 		Logger.info(`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
 		res.on('finish', () => {
-			// Log the Response
+			// Log the Response from the server
 			Logger.info(
 				`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`
 			);
@@ -35,7 +41,7 @@ const startServer = () => {
 	});
 
 	app.use(express.urlencoded({ extended: true }));
-	app.use(express.json());
+    app.use(express.json());  // allow json parsing and stringify
 
 	/** Rules of our API */
 	app.use((req: Request, res: Response, next: NextFunction) => {
@@ -51,6 +57,8 @@ const startServer = () => {
 	});
 
 	/** Routes */
+    // When making a call to the API, the base url that will be accessed is https://netdefender.org.aalto.fi/api
+    // These will be the routes after '/api'
 	app.use('/students', studentRouter);
 	app.use('/messages', messageRouter);
     app.use('/login', loginRouter);
@@ -81,6 +89,7 @@ const startServer = () => {
         }
 	});
 
+    // Start the server on the given port from the .env file and log it
 	app.listen(config.PORT, () => {
 		Logger.info(`Server up and running on http://localhost:${config.PORT}`);
 	});
