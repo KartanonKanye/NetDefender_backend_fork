@@ -26,8 +26,9 @@ export interface IStudentModel extends IStudent, Document {}
 const levelsDefault = [
 	[
 		{ id: 'quiz1', completed: false, points: 10, name: 'Quiz: Identify Attacks' },
-		{ id: 'flashcards1', completed: false, points: 10, name: 'Flashcards: Attack Types' },
-		{ id: 'task1', completed: false, points: 10, name: 'Level 1: Caesar Cipher' }
+		{ id: 'flashcards1-attacks', completed: false, points: 10, name: 'Flashcards: Attack Types' },
+		{ id: 'flashcards1-crypto', completed: false, points: 10, name: 'Flashcards: Cryptography' },
+		{ id: 'task1', completed: false, points: 50, name: 'Level 1: Caesar Cipher' }
 	],
 	[{ id: '2', completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
 	[{ id: '3', completed: false, points: 20, name: 'Level 3: RSA encryption' }],
