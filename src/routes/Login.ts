@@ -3,6 +3,6 @@ import LoginStudent from '../controllers/Login.js';
 
 const loginRouter = express.Router();
 
-loginRouter.post('/', LoginStudent)
+loginRouter.post('/', LoginStudent);
 
 export default loginRouter;

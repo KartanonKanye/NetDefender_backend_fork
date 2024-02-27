@@ -2,8 +2,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IMessage {
 	heading: string;
-	sender: {email: string, name: string};
-	receiver: {email: string, name: string};
+	sender: { email: string; name: string };
+	receiver: { email: string; name: string };
 	message: string;
 }
 
@@ -18,10 +18,10 @@ const MessageSchema: Schema = new Schema({
 
 MessageSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
-		returnedObject.id = returnedObject._id.toString()
-		delete returnedObject._id
-		delete returnedObject.__v
+		returnedObject.id = returnedObject._id.toString();
+		delete returnedObject._id;
+		delete returnedObject.__v;
 	}
-})
+});
 
 export default mongoose.model<IMessageModel>('Message', MessageSchema);

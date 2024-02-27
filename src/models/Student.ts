@@ -9,13 +9,13 @@ export interface IStudent {
 	public_key: string;
 	levels: [
 		[
-			{ id: number; completed: boolean; points: number; name: string },
-			{ id: number; completed: boolean; points: number; name: string }
+			{ id: string; completed: boolean; points: number; name: string },
+			{ id: string; completed: boolean; points: number; name: string }
 		],
-		[{ id: number; completed: boolean; points: number; name: string }],
-		[{ id: number; completed: boolean; points: number; name: string }],
-		[{ id: number; completed: boolean; points: number; name: string }],
-		[{ id: number; completed: boolean; points: number; name: string }]
+		[{ id: string; completed: boolean; points: number; name: string }],
+		[{ id: string; completed: boolean; points: number; name: string }],
+		[{ id: string; completed: boolean; points: number; name: string }],
+		[{ id: string; completed: boolean; points: number; name: string }]
 	];
 	rating: number;
 	points: number;
@@ -24,11 +24,15 @@ export interface IStudent {
 export interface IStudentModel extends IStudent, Document {}
 
 const levelsDefault = [
-	[{ id: 1, completed: false, points: 10, name: 'Level 1: Identify Attacks' }],
-	[{ id: 2, completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
-	[{ id: 3, completed: false, points: 20, name: 'Level 3: RSA encryption' }],
-	[{ id: 4, completed: false, points: 20, name: 'Level 4: Web of Trust' }],
-	[{ id: 5, completed: false, points: 20, name: 'Level 5: Capture the flag' }]
+	[
+		{ id: 'quiz1', completed: false, points: 10, name: 'Quiz: Identify Attacks' },
+		{ id: 'flashcards1', completed: false, points: 10, name: 'Flashcards: Attack Types' },
+		{ id: 'task1', completed: false, points: 10, name: 'Level 1: Caesar Cipher' }
+	],
+	[{ id: '2', completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
+	[{ id: '3', completed: false, points: 20, name: 'Level 3: RSA encryption' }],
+	[{ id: '4', completed: false, points: 20, name: 'Level 4: Web of Trust' }],
+	[{ id: '5', completed: false, points: 20, name: 'Level 5: Capture the flag' }]
 ];
 
 const StudentSchema: Schema = new Schema({

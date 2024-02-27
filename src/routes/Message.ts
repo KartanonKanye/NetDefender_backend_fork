@@ -7,6 +7,6 @@ messageRouter.get('/', messageController.getAllMessages);
 messageRouter.post('/', messageController.createMessage);
 messageRouter.put('/:studentID', messageController.updateMessageById);
 messageRouter.get('/:studentID', messageController.getMessageById);
-messageRouter.delete('/:studentID', messageController.deleteMessageById)
+messageRouter.delete('/:studentID', messageController.deleteMessageById);
 
 export default messageRouter;
