@@ -30,10 +30,31 @@ const levelsDefault = [
 		{ id: 'flashcards1-crypto', completed: false, points: 10, name: 'Flashcards: Cryptography' },
 		{ id: 'task1', completed: false, points: 50, name: 'Level 1: Caesar Cipher' }
 	],
-	[{ id: '2', completed: false, points: 10, name: 'Level 2: Caesar Cipher' }],
-	[{ id: '3', completed: false, points: 20, name: 'Level 3: RSA encryption' }],
-	[{ id: '4', completed: false, points: 20, name: 'Level 4: Web of Trust' }],
-	[{ id: '5', completed: false, points: 20, name: 'Level 5: Capture the flag' }]
+	[
+		{ id: 'quiz2', completed: false, points: 10, name: 'Quiz: Identify Attacks' },
+		{ id: 'flashcards2-packets', completed: false, points: 5, name: 'Flashcards: Packet Routing' },
+		{ id: 'flashcards2-crypto', completed: false, points: 10, name: 'Flashcards: Asymmetric Cryptography' },
+		{ id: 'flashcards2-integrity', completed: false, points: 5, name: 'Flashcards: Message Integrity' },
+		{ id: 'task2', completed: false, points: 50, name: 'Level 2: RSA Encryption' }
+  ],
+	[
+		{ id: 'quiz3', completed: false, points: 10, name: 'Quiz: Authentication' },
+		{ id: 'flashcards3-digital', completed: false, points: 10, name: 'Flashcards: Digital Signatures' },
+		{ id: 'flashcards3-auth', completed: false, points: 10, name: 'Flashcards: End-point Authentication' },
+		{ id: 'task3', completed: false, points: 50, name: 'Level 3: Incidence Response' }
+  ],
+	[
+		{ id: 'quiz4', completed: false, points: 10, name: 'Quiz: Security' },
+		{ id: 'flashcards4-email', completed: false, points: 10, name: 'Flashcards: Securing Email' },
+		{ id: 'flashcards4-tcp', completed: false, points: 10, name: 'Flashcards: Securing TCP' },
+		{ id: 'task4', completed: false, points: 50, name: 'Level 4: Respond to Email' }
+  ],
+	[
+		{ id: 'quiz5', completed: false, points: 10, name: 'Quiz: IPSec' },
+		{ id: 'flashcards5-ipsec', completed: false, points: 10, name: 'Flashcards: IPSec' },
+		{ id: 'flashcards5-vpn', completed: false, points: 10, name: 'Flashcards: VPN' },
+		{ id: 'task5', completed: false, points: 50, name: 'Level 5: Capture the Flag' }
+  ]
 ];
 
 const StudentSchema: Schema = new Schema({
@@ -45,7 +66,8 @@ const StudentSchema: Schema = new Schema({
 	public_key: { type: String },
 	levels: { type: Array, default: levelsDefault },
 	rating: { type: Number, default: 0 },
-	points: { type: Number, default: 0 }
+	points: { type: Number, default: 0 },
+  course_student: { type: Boolean, default: true }
 });
 
 StudentSchema.set('toJSON', {
