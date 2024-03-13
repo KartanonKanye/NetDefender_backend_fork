@@ -79,7 +79,7 @@ const updateStudentById = async (req: Request<{ studentID: string }, { ReqBody: 
 
 	if (!decodedToken.id) {
 		return res.status(401).json({ error: 'Token invalid' });
-	} else if (decodedToken.id !== studentID) {
+	} else if ((decodedToken.id !== studentID) && (decodedToken.id !== config.ADMIN)) {
 		return res.status(401).json({ error: 'Unauthorized user' });
 	}
 
@@ -100,7 +100,7 @@ const deleteStudentById = async (req: Request<{ studentID: string }>, res: Respo
 
 	if (!decodedToken.id) {
 		return res.status(401).json({ error: 'Token invalid' });
-	} else if (decodedToken.id !== studentID) {
+	} else if ((decodedToken.id !== studentID) && (decodedToken.id !== config.ADMIN)) {
 		return res.status(401).json({ error: 'Unauthorized user' });
 	}
 
