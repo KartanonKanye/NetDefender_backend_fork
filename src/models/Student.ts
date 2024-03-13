@@ -31,7 +31,7 @@ const levelsDefault = [
 		{ id: 'task1', completed: false, points: 50, name: 'Level 1: Caesar Cipher' }
 	],
 	[
-		{ id: 'quiz2', completed: false, points: 10, name: 'Quiz: Identify Attacks' },
+		{ id: 'quiz2', completed: false, points: 10, name: 'Quiz: Packet Routing and Integrity' },
 		{ id: 'flashcards2-packets', completed: false, points: 5, name: 'Flashcards: Packet Routing' },
 		{ id: 'flashcards2-crypto', completed: false, points: 10, name: 'Flashcards: Asymmetric Cryptography' },
 		{ id: 'flashcards2-integrity', completed: false, points: 5, name: 'Flashcards: Message Integrity' },
