@@ -35,7 +35,7 @@ const levelsDefault = [
 		{ id: 'flashcards2-packets', completed: false, points: 5, name: 'Flashcards: Packet Routing' },
 		{ id: 'flashcards2-crypto', completed: false, points: 10, name: 'Flashcards: Asymmetric Cryptography' },
 		{ id: 'flashcards2-integrity', completed: false, points: 5, name: 'Flashcards: Message Integrity' },
-		{ id: 'taskDjikstra', completed: false, points: 10, name: 'Djikstra Exercise' },
+		{ id: 'taskDijkstra', completed: false, points: 10, name: 'Dijkstra Exercise' },
 		{ id: 'task2', completed: false, points: 50, name: 'Level 2: RSA Encryption' }
   ],
 	[
