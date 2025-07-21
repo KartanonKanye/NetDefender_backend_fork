@@ -9,13 +9,13 @@ export interface IStudent {
 	public_key: string;
 	levels: [
 		[
-			{ id: string; completed: boolean; points: number; name: string },
-			{ id: string; completed: boolean; points: number; name: string }
+			{ id: string; completed: boolean; points: number; name: string; time_of_attempt?: Date },
+			{ id: string; completed: boolean; points: number; name: string; time_of_attempt?: Date }
 		],
-		[{ id: string; completed: boolean; points: number; name: string }],
-		[{ id: string; completed: boolean; points: number; name: string }],
-		[{ id: string; completed: boolean; points: number; name: string }],
-		[{ id: string; completed: boolean; points: number; name: string }]
+		[{ id: string; completed: boolean; points: number; name: string; time_of_attempt?: Date }],
+		[{ id: string; completed: boolean; points: number; name: string; time_of_attempt?: Date }],
+		[{ id: string; completed: boolean; points: number; name: string; time_of_attempt?: Date }],
+		[{ id: string; completed: boolean; points: number; name: string; time_of_attempt?: Date }]
 	];
 	rating: number;
 	points: number;
@@ -31,10 +31,10 @@ const levelsDefault = [
 		{ id: 'task1', completed: false, points: 50, name: 'Level 1: Caesar Cipher' }
 	],
 	[
-		{ id: 'quiz2', completed: false, points: 10, name: 'Quiz: Packet Routing and Integrity' },
 		{ id: 'flashcards2-packets', completed: false, points: 5, name: 'Flashcards: Packet Routing' },
 		{ id: 'flashcards2-crypto', completed: false, points: 10, name: 'Flashcards: Asymmetric Cryptography' },
 		{ id: 'flashcards2-integrity', completed: false, points: 5, name: 'Flashcards: Message Integrity' },
+		{ id: 'quiz2', completed: false, points: 10, name: 'Quiz: Packet Routing and Integrity' },
 		{ id: 'taskDijkstra', completed: false, points: 10, name: 'Dijkstra Exercise' },
 		{ id: 'task2', completed: false, points: 50, name: 'Level 2: RSA Encryption' }
   ],
